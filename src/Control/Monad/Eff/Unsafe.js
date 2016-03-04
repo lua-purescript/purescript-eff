@@ -1,8 +1,8 @@
-/* global exports */
-"use strict";
+-- module Control.Monad.Eff.Unsafe
+local Control_Monad_Eff_Unsafe = {}
 
-// module Control.Monad.Eff.Unsafe
+Control_Monad_Eff_Unsafe.unsafeInterleaveEff = function (f)
+  return f
+end
 
-exports.unsafeInterleaveEff = function (f) {
-  return f;
-};
+return Control_Monad_Eff_Unsafe

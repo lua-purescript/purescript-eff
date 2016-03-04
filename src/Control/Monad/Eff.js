@@ -1,62 +1,63 @@
-/* global exports */
-"use strict";
+-- module Control.Monad.Eff
 
-// module Control.Monad.Eff
+local Control_Monad_Eff = {}
 
-exports.returnE = function (a) {
-  return function () {
-    return a;
-  };
-};
+Control_Monad_Eff.returnE = function (a)
+  return function ()
+    return a
+  end
+end
 
-exports.bindE = function (a) {
-  return function (f) {
-    return function () {
-      return f(a())();
-    };
-  };
-};
+Control_Monad_Eff.bindE = function (a)
+  return function (f)
+    return function ()
+      return f(a())()
+    end
+  end
+end
 
-exports.runPure = function (f) {
-  return f();
-};
+Control_Monad_Eff.runPure = function (f)
+  return f()
+end
 
-exports.untilE = function (f) {
-  return function () {
-    while (!f());
-    return {};
-  };
-};
+Control_Monad_Eff.untilE = function (f)
+  return function ()
+    while not f() do end
+    return {}
+  end
+end
 
-exports.whileE = function (f) {
-  return function (a) {
-    return function () {
-      while (f()) {
-        a();
-      }
-      return {};
-    };
-  };
-};
+Control_Monad_Eff.whileE = function (f)
+  return function (a)
+    return function ()
+      while f() do
+        a()
+	  end
+      return {}
+    end
+  end
+end
 
-exports.forE = function (lo) {
-  return function (hi) {
-    return function (f) {
-      return function () {
-        for (var i = lo; i < hi; i++) {
-          f(i)();
-        }
-      };
-    };
-  };
-};
+Control_Monad_Eff.forE = function (lo)
+  return function (hi)
+    return function (f)
+      return function ()
+        for i = lo, hi do
+          f(i)()
+	    end
+      end
+    end
+  end
+end
 
-exports.foreachE = function (as) {
-  return function (f) {
-    return function () {
-      for (var i = 0, l = as.length; i < l; i++) {
-        f(as[i])();
-      }
-    };
-  };
-};
+Control_Monad_Eff.foreachE = function (as)
+  return function (f)
+    return function ()
+      for i = 0, #as do
+        f(as[i])()
+	  end
+    end
+  end
+end
+
+return Control_Monad_Eff
