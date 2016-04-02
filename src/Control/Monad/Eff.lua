@@ -2,7 +2,7 @@
 
 local Control_Monad_Eff = {}
 
-Control_Monad_Eff.returnE = function (a)
+Control_Monad_Eff.pureE = function (a)
   return function ()
     return a
   end
